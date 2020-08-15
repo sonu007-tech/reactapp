@@ -21,14 +21,15 @@ class DishDetail extends Component {
           </CardBody>
         </Card>
       );
-    else return <div></div>;
-  }
-
-  renderComments(dish) {
-    if (dish == null) {
+    else {
       return <div></div>;
     }
-    const com = dish.comments.map((comment) => {
+  }
+  renderComments(comments) {
+    if (comments == null) {
+      return <div></div>;
+    }
+    const com = comments.map((comment) => {
       return (
         <li key={comment.id}>
           <p>{comment.comment}</p>
@@ -51,15 +52,34 @@ class DishDetail extends Component {
     );
   }
 
+  // render() {
+  // console.log(this.props.selectedDish);
+
+  //   return (
+  //     <div className="container">
+  //       <div className="col-12 col-md-5 m-1">
+  //         {this.renderDish(this.props.dish)}
+  //         console.log("hello")
+  //       </div>
+  //       <div className="col-12 col-md-5 m-1">
+  //         console.log("comments");
+  //         {this.renderComments(this.props.dish.comments)}
+  //       </div>
+  //     </div>
+  //   );
+  // }
   render() {
-    console.log(this.props.selectedDish);
+    const dish = this.props.dish;
+    if (dish == null) {
+      return <div></div>;
+    }
+    const dishItem = this.renderDish(dish);
+    const commentItem = this.renderComments(dish.comments);
     return (
-      <div className="row">
-        <div className="col-12 col-md-5 m-1">
-          {this.renderDish(this.props.selectedDish)}
-        </div>
-        <div className="col-12 col-md-5 m-1">
-          {this.renderComments(this.props.selectedDish)}
+      <div className="container">
+        <div className="row">
+          <div className="col-12 col-md-5 m-1">{dishItem}</div>
+          <div className="col-12 col-md-5 m-1"> {commentItem}</div>
         </div>
       </div>
     );
