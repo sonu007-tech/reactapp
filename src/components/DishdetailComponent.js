@@ -20,6 +20,7 @@ import {
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { FadeTransform, Fade, Stagger } from "react-animation-components";
+import { Loading } from "./LoadingComponent";
 
 function RenderDish({ dish }) {
   if (dish != null)
@@ -69,9 +70,23 @@ function RenderComments({ comments, addComment, dishId }) {
 }
 const DishDetail = (props) => {
   const dish = props.dish;
-  if (dish == null) {
-    return <div></div>;
-  } else if (props.dish) {
+  if (props.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  } else if (props.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{props.errMess}</h4>
+        </div>
+      </div>
+    );
+  } else if (props.dish != null) {
     return (
       <div className="container">
         <div className="row">
