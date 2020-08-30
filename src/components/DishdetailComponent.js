@@ -26,14 +26,20 @@ import { baseUrl } from "../shared/baseUrl";
 function RenderDish({ dish }) {
   if (dish != null)
     return (
-      <Card>
-        <Link to={`/menu/${dish.id}`}></Link>
-        <CardImg top src={baseUrl + dish.image} alt={dish.name} />{" "}
-        <CardBody>
-          <CardTitle> {dish.name} </CardTitle>
-          <CardText> {dish.description} </CardText>
-        </CardBody>
-      </Card>
+      <FadeTransform
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
+        <Card>
+          <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+          <CardBody>
+            <CardTitle>{dish.name}</CardTitle>
+            <CardText>{dish.description}</CardText>
+          </CardBody>
+        </Card>
+      </FadeTransform>
     );
   else {
     return <div></div>;
@@ -48,11 +54,11 @@ function RenderComments({ comments, postComment, dishId }) {
         <Stagger in>
           {comments.map((comment) => {
             return (
-              <Fade in key={comment.id}>
+              <Fade in>
                 <li key={comment.id}>
                   <p>{comment.comment}</p>
                   <p>
-                    -- {comment.author} ,{" "}
+                    -- {comment.author}
                     {new Intl.DateTimeFormat("en-US", {
                       year: "numeric",
                       month: "short",
