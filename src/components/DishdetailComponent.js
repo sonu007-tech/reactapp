@@ -76,7 +76,6 @@ function RenderComments({ comments, postComment, dishId }) {
   } else return <div />;
 }
 const DishDetail = (props) => {
-  const dish = props.dish;
   if (props.isLoading) {
     return (
       <div className="container">

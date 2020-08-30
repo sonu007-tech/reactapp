@@ -8,7 +8,7 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import { Control, LocalForm, Errors, Form, actions } from "react-redux-form";
+import { Control, Errors, Form } from "react-redux-form";
 
 import { Link } from "react-router-dom";
 
@@ -30,6 +30,7 @@ class Contact extends Component {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
     this.props.resetFeedbackForm();
+    this.props.postFeedback(values);
     // event.preventDefault();
   }
 
@@ -81,7 +82,7 @@ class Contact extends Component {
               >
                 <i className="fa fa-phone"></i> Call
               </a>
-              <a role="button" className="btn btn-info">
+              <a role="button" className="btn btn-info" href="tel:+85212345678">
                 <i className="fa fa-skype"></i> Skype
               </a>
               <a
